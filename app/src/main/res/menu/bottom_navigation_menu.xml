@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/iconMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_local_menu_24"
+        android:title="@string/text_menu_icon"/>
+    <item
+        android:id="@+id/iconProfile"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_profile_24"
+        android:title="@string/text_profile_icon"/>
+    <item
+        android:id="@+id/iconContacts"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_contacts_on_24"
+        android:title="@string/text_contacts_icon"/>
+    <item
+        android:id="@+id/iconCart"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_shopping_basket_24"
+        android:title="@string/text_shopping_basket_icon"/>
+</menu>
