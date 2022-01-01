@@ -1,5 +1,6 @@
 package com.example.krasov_burger.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,21 +10,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krasov_burger.R
 import com.example.krasov_burger.model.ModelProduct
-class CartProduct {
-    val listCart: ArrayList<ModelProduct> = arrayListOf(ModelProduct("The most delicious single",
-        "The most delicious burger! And this is not a joke. Brioche bun, juicy beef patty, fresh tomatoes, " +
-                "lettuce leaves, pickled cucumbers.",
-        "from 450₽", R.drawable.burger1))
 
-}
+var listCart: ArrayList<ModelProduct> = arrayListOf()
 
 class ProductAdapter(private val modelProduct: List<ModelProduct>) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
 
     class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var nameProduct: TextView = itemView.findViewById(R.id.nameProduct)
-        var descriptionProduct: TextView = itemView.findViewById(R.id.descriptionProduct)
-        var toCard: Button = itemView.findViewById(R.id.toCart)
-        var imageProduct: ImageView = itemView.findViewById(R.id.imageProduct)
+        var nameProductTextView: TextView = itemView.findViewById(R.id.nameProductTextView)
+        var descriptionProductTextView: TextView = itemView.findViewById(R.id.descriptionProductTextView)
+        var costProductTextView: TextView = itemView.findViewById(R.id.costProductTextView)
+        var toCardButton: Button = itemView.findViewById(R.id.toCartButton)
+        var imageProductMenu: ImageView = itemView.findViewById(R.id.imageProductMenu)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
@@ -31,15 +29,16 @@ class ProductAdapter(private val modelProduct: List<ModelProduct>) : RecyclerVie
         return ProductHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ProductHolder, position: Int) {
-        holder.nameProduct.text = modelProduct[position].nameProduct
-        holder.descriptionProduct.text = modelProduct[position].descriptionProduct
-        holder.toCard.text = modelProduct[position].toCard
-        holder.imageProduct.setImageResource(modelProduct[position].idImageProduct)
-        holder.toCard.setOnClickListener {
-           CartProduct().listCart.add(ModelProduct(modelProduct[position].nameProduct,
+        holder.nameProductTextView.text = modelProduct[position].nameProduct
+        holder.descriptionProductTextView.text = modelProduct[position].descriptionProduct
+        holder.costProductTextView.text = modelProduct[position].costProduct.toString() + "₽"
+        holder.imageProductMenu.setImageResource(modelProduct[position].idImageProduct)
+        holder.toCardButton.setOnClickListener {
+           listCart.add(ModelProduct(modelProduct[position].nameProduct,
                 modelProduct[position].descriptionProduct,
-                modelProduct[position].toCard,
+                modelProduct[position].costProduct,
                 modelProduct[position].idImageProduct))
         }
     }

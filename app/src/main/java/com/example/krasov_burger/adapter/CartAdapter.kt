@@ -12,8 +12,8 @@ import com.example.krasov_burger.model.ModelProduct
 class CartAdapter(private val modelProduct: List<ModelProduct>) : RecyclerView.Adapter<CartAdapter.CartHolder>() {
 
     class CartHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var nameProduct: TextView = itemView.findViewById(R.id.nameProduct)
-        var descriptionProduct: TextView = itemView.findViewById(R.id.descriptionProduct)
+        var nameProduct: TextView = itemView.findViewById(R.id.nameProductTextView)
+        var descriptionProduct: TextView = itemView.findViewById(R.id.descriptionProductTextView)
         var imageProduct: ImageView = itemView.findViewById(R.id.imageProduct)
     }
 

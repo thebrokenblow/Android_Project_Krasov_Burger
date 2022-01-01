@@ -13,14 +13,15 @@
         android:layout_height="150dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/descriptionProduct"
+        app:layout_constraintEnd_toStartOf="@+id/descriptionProductTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/nameProduct"
+        android:id="@+id/nameProductTextView"
         android:layout_width="250dp"
         android:layout_height="20dp"
         android:layout_marginStart="170dp"
@@ -28,18 +29,18 @@
         android:textColor="#2f2f2f"
         android:textSize="16.5sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/descriptionProduct"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionProductTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/descriptionProduct"
+        android:id="@+id/descriptionProductTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="15dp"
         android:textColor="#9b9fa6"
@@ -47,7 +48,7 @@
         app:layout_constraintBottom_toTopOf="@+id/toCart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameProduct"
+        app:layout_constraintTop_toBottomOf="@+id/nameProductTextView"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.button.MaterialButton
@@ -61,7 +62,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionProduct"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionProductTextView"
         tools:ignore="MissingConstraints,SmallSp,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/costTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/toCart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionProductTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

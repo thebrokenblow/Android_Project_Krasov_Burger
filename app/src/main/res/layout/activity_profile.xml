@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="290dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:text="Давайте знакомиться!"
         android:textColor="#2f2f2f"
         android:textSize="22sp"
@@ -24,7 +24,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="Подарим подарок на день рождения, сохраним адрес доставки и расскажем об акциях"
         android:textColor="#2f2f2f"
@@ -59,15 +59,15 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="235dp"
         android:background="@color/white"
-        app:title="Profile"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:title="Profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
