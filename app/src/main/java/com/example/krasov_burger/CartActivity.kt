@@ -6,23 +6,24 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.krasov_burger.adapter.ProductAdapter
-import com.example.krasov_burger.items.ProductItems
+import com.example.krasov_burger.adapter.CartAdapter
+import com.example.krasov_burger.adapter.CartProduct
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_cart)
 
-        
+        val bottomNavigationProfile = findViewById<BottomNavigationView>(R.id.bottom_navigation_cart)
+        bottomNavigationProfile.selectedItemId = R.id.iconCart
 
-        val productRecyclerView = findViewById<RecyclerView>(R.id.productRecyclerView)
-        productRecyclerView.adapter = ProductAdapter(ProductItems().list)
-        productRecyclerView.layoutManager = LinearLayoutManager(this)
-        productRecyclerView.hasFixedSize()
+        val cartRecyclerView = findViewById<RecyclerView>(R.id.cartRecyclerView)
+        cartRecyclerView.adapter = CartAdapter(CartProduct().listCart)
+        cartRecyclerView.layoutManager = LinearLayoutManager(this)
+        cartRecyclerView.hasFixedSize()
 
-        findViewById<BottomNavigationView>(R.id.bottom_navigation_menu).setOnNavigationItemSelectedListener {
+        findViewById<BottomNavigationView>(R.id.bottom_navigation_cart).setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.iconMenu -> startActivity(Intent(this, MainActivity::class.java))
                 R.id.iconProfile -> startActivity(Intent(this, ProfileActivity::class.java))

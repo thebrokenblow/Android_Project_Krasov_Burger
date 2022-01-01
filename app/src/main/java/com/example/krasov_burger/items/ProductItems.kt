@@ -4,7 +4,7 @@ import com.example.krasov_burger.R
 import com.example.krasov_burger.model.ModelProduct
 
 class ProductItems (
-    var List: List<ModelProduct> = listOf(
+    var list: List<ModelProduct> = listOf(
 
         ModelProduct("The most delicious single",
             "The most delicious burger! And this is not a joke. Brioche bun, juicy beef patty, fresh tomatoes, " +

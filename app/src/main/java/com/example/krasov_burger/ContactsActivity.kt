@@ -3,26 +3,17 @@ package com.example.krasov_burger
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.krasov_burger.adapter.ProductAdapter
-import com.example.krasov_burger.items.ProductItems
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class ContactsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_contacts)
 
-        
+        val bottomNavigationProfile = findViewById<BottomNavigationView>(R.id.bottom_navigation_contacts)
+        bottomNavigationProfile.selectedItemId = R.id.iconContacts
 
-        val productRecyclerView = findViewById<RecyclerView>(R.id.productRecyclerView)
-        productRecyclerView.adapter = ProductAdapter(ProductItems().list)
-        productRecyclerView.layoutManager = LinearLayoutManager(this)
-        productRecyclerView.hasFixedSize()
-
-        findViewById<BottomNavigationView>(R.id.bottom_navigation_menu).setOnNavigationItemSelectedListener {
+        bottomNavigationProfile.setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.iconMenu -> startActivity(Intent(this, MainActivity::class.java))
                 R.id.iconProfile -> startActivity(Intent(this, ProfileActivity::class.java))
