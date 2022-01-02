@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.krasov_burger.CartActivity
 import com.example.krasov_burger.R
 import com.example.krasov_burger.model.ModelProduct
 
-class CartAdapter(private val modelProduct: List<ModelProduct>) : RecyclerView.Adapter<CartAdapter.CartHolder>() {
+class CartAdapter(private val modelProduct: List<Pair<ModelProduct, Int>>) : RecyclerView.Adapter<CartAdapter.CartHolder>() {
 
     class CartHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var nameProduct: TextView = itemView.findViewById(R.id.nameProductTextView)
@@ -30,18 +32,26 @@ class CartAdapter(private val modelProduct: List<ModelProduct>) : RecyclerView.A
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CartHolder, position: Int) {
-        holder.nameProduct.text = modelProduct[position].nameProduct
-        holder.imageProduct.setImageResource(modelProduct[position].idImageProduct)
-        holder.costProduct.text = modelProduct[position].costProduct.toString() + "₽"
-        holder.countItemProduct.text = listCart.asSequence()
-            .map { it }
-            .groupBy { it.nameProduct }
-            .map{ Pair(it.key, it.value.count()).second}.toSet().first().toString()
+        holder.nameProduct.text = modelProduct[position].first.nameProduct
+        holder.imageProduct.setImageResource(modelProduct[position].first.idImageProduct)
+        holder.costProduct.text = modelProduct[position].first.costProduct.toString() + "₽"
+        holder.countItemProduct.text = modelProduct[position].second.toString()
         holder.buttonMinusProduct.setOnClickListener {
-
+            if (holder.countItemProduct.text.toString().toInt() > 0 && listCart.size > 0) {
+                holder.countItemProduct.text =
+                    (holder.countItemProduct.text.toString().toInt() - 1).toString()
+                listCart.removeAt(position)
+            }
         }
         holder.buttonPlusProduct.setOnClickListener {
-
+            if (holder.countItemProduct.text.toString().toInt() < 50) {
+                holder.countItemProduct.text =
+                    (holder.countItemProduct.text.toString().toInt() + 1).toString()
+                listCart.add(ModelProduct(modelProduct[position].first.nameProduct,
+                    modelProduct[position].first.descriptionProduct,
+                    modelProduct[position].first.costProduct,
+                    modelProduct[position].first.idImageProduct))
+            }
         }
     }
 

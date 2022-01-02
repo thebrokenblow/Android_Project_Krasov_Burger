@@ -1,5 +1,6 @@
 package com.example.krasov_burger
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import com.example.krasov_burger.adapter.listCart
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CartActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (listCart.size == 0) {
@@ -38,8 +40,10 @@ class CartActivity : AppCompatActivity() {
                 findViewById<BottomNavigationView>(R.id.bottomNavigationCart)
             bottomNavigationProfile.selectedItemId = R.id.iconCart
 
+            val res = listCart.asSequence().map { it }.groupBy { it }.map{ Pair(it.key, it.value.count())}.toList()
+
             val cartRecyclerView = findViewById<RecyclerView>(R.id.cartRecyclerView)
-            cartRecyclerView.adapter = CartAdapter(listCart)
+            cartRecyclerView.adapter = CartAdapter(res)
             cartRecyclerView.layoutManager = LinearLayoutManager(this)
             cartRecyclerView.hasFixedSize()
 
@@ -51,6 +55,10 @@ class CartActivity : AppCompatActivity() {
                     R.id.iconCart -> startActivity(Intent(this, CartActivity::class.java))
                 }
                 true
+            }
+            val buttonCheckout = findViewById<Button>(R.id.buttonCheckout)
+            buttonCheckout.text = "Оформить заказ на ${listCart.sumOf { it.costProduct }}"
+            buttonCheckout.setOnClickListener {
             }
         }
     }
