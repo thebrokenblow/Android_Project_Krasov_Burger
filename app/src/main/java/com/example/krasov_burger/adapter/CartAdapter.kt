@@ -1,8 +1,10 @@
 package com.example.krasov_burger.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,8 +15,12 @@ class CartAdapter(private val modelProduct: List<ModelProduct>) : RecyclerView.A
 
     class CartHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var nameProduct: TextView = itemView.findViewById(R.id.nameProductTextView)
-        var descriptionProduct: TextView = itemView.findViewById(R.id.descriptionProductTextView)
         var imageProduct: ImageView = itemView.findViewById(R.id.imageProduct)
+        var costProduct : TextView = itemView.findViewById(R.id.costItemTextView)
+        var countItemProduct : TextView = itemView.findViewById(R.id.countItextTextView)
+        var buttonMinusProduct : Button = itemView.findViewById(R.id.buttonMinusProduct)
+        var buttonPlusProduct : Button = itemView.findViewById(R.id.buttonPlusProduct)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartHolder {
@@ -22,10 +28,21 @@ class CartAdapter(private val modelProduct: List<ModelProduct>) : RecyclerView.A
         return CartHolder(itemView)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CartHolder, position: Int) {
         holder.nameProduct.text = modelProduct[position].nameProduct
-        holder.descriptionProduct.text = modelProduct[position].descriptionProduct
         holder.imageProduct.setImageResource(modelProduct[position].idImageProduct)
+        holder.costProduct.text = modelProduct[position].costProduct.toString() + "₽"
+        holder.countItemProduct.text = listCart.asSequence()
+            .map { it }
+            .groupBy { it.nameProduct }
+            .map{ Pair(it.key, it.value.count()).second}.toSet().first().toString()
+        holder.buttonMinusProduct.setOnClickListener {
+
+        }
+        holder.buttonPlusProduct.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount() = modelProduct.size
