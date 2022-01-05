@@ -3,24 +3,36 @@ package com.example.krasov_burger
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.krasov_burger.adapter.ProductAdapter
-import com.example.krasov_burger.items.ProductItems
+import androidx.room.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
+import com.example.krasov_burger.adapter.ProductAdapter
+import com.example.krasov_burger.database.AppDatabase
+
+@DelicateCoroutinesApi
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        
+        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "krasov_burger").fallbackToDestructiveMigrationFrom(1, 2).build()
+        val productDao = db.productDao()
 
-        val productRecyclerView = findViewById<RecyclerView>(R.id.productRecyclerView)
-        productRecyclerView.adapter = ProductAdapter(ProductItems().list)
-        productRecyclerView.layoutManager = LinearLayoutManager(this)
-        productRecyclerView.hasFixedSize()
+        GlobalScope.launch(Dispatchers.IO) {
+            val listProduct = productDao.getAll()
+            launch(Dispatchers.Main) {
+                val productRecyclerView = findViewById<RecyclerView>(R.id.productRecyclerView)
+                    productRecyclerView.adapter = ProductAdapter(listProduct)
+                    productRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                    productRecyclerView.hasFixedSize()
+            }
+        }
 
         findViewById<BottomNavigationView>(R.id.bottom_navigation_menu).setOnNavigationItemSelectedListener {
             when(it.itemId) {
